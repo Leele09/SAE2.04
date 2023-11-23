@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang ="fr">
+    <head>
+        <title>Velibs</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+
+        <div class = "entete">
+            <h1 id = "titre">Velibs et statistiques</h1>
+            <img id = "logo" src={{ url_for('static', filename='LogoIUT.png') }} alt="LogoIUT">
+        </div>
+
+        <iframe src={{ url_for('static', filename='map.html') }} ></iframe>
+
+        <hr><h2>Partie analyses</h2>
+
+        <h3>Analyse sur une période donnée et des stations</h3> 
+        <p>Choisissez 4 stations :</p> 
+        <form action="{{url_for('graphique1')}}" method="POST">
+            <div id = "graphique1">
+                <select name="station1" id="station1">
+                    <option value="">--Rentrez une station1--</option>
+                    {%for i in range(0, len)%}
+                        <option valeur={{stations_name[i][0]}}>{{stations_name[i][0]}}</option>
+                    {%endfor%}
+                </select>
+                <select name="station2" id="station2">
+                    <option value="">--Rentrez une station2--</option>
+                    {%for i in range(0, len)%}
+                        <option valeur={{stations_name[i][0]}}>{{stations_name[i][0]}}</option>
+                    {%endfor%}
+                </select>
+                <select name="station3" id="station3">
+                    <option value="">--Rentrez une station3--</option>
+                    {%for i in range(0, len)%}
+                        <option valeur={{stations_name[i][0]}}>{{stations_name[i][0]}}</option>
+                    {%endfor%}
+                </select>
+                <select name="station4" id="station4">
+                    <option value="">--Rentrez une station4--</option>
+                    {%for i in range(0, len)%}
+                        <option valeur={{stations_name[i][0]}}>{{stations_name[i][0]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div id = "date_debut">
+                <label for="date_debut">Choisissez une date de début:</label>
+
+                <input type="datetime-local" id="date_debut" name="date_debut">
+            </div>
+            
+            <div id = "date_fin">
+                <label for="date_fin">Choisissez une date de fin:</label>
+
+                <input type="datetime-local" id="date_fin" name="date_fin">
+            </div>
+
+            <input id = "submit"type="submit" value="Submit">
+        </form>
+
+        <div id="cadrevide">
+            <img id = "resultat1" src={{ url_for('static', filename='view_sur_periode_donnee.png') }}>
+        </div>
+
+        <h3>Analyse sur une station ou commune</h3> 
+        <form action="{{url_for('graphique2')}}" method="POST">
+            <div id = "graphique2">
+                <label for="station">Choisissez un code de station:</label>
+                <select name="station" id="station">
+                    <option value="">--Rentrez une station--</option>
+                    {%for i in range(0, len)%}
+                        <option valeur={{stations_code[i][0]}}>{{stations_code[i][0]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div id="cadrevide2">
+                <img id = "resultat2" src={{ url_for('static', filename='view_sur_station.png') }}>
+            </div>
+            <input id = "submit2" type="submit" value="Submit">
+        </form>
+
+
+        <form action="{{url_for('graphique3')}}" method="POST">
+            <div id = "graphique3">
+                <label for="commune">Choisissez une commune:</label>
+                <select name="commune" id="commune">
+                    <option value="">--Rentrez une commune--</option>
+                    {%for i in range(0, len2)%}
+                        <option valeur={{stations_commune[i][0]}}>{{stations_commune[i][0]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div id="cadrevide3">
+                <img id = "resultat3" src={{url_for('static', filename='view_sur_commune.png') }}>
+            </div>
+            <input id = "submit3" type="submit" value="Submit">            
+        </form>
+
+        <hr>
+
+        <h3 id="typesvelos">Pourcentage total des types de vélos</h3> 
+        <div id="cadrevide4">
+            <img id = "resultat4" src={{url_for('static', filename='view_sur_types_de_velos.png') }}>
+        </div>
+
+        <div id="footer">
+            <h6>Travail éffectué à l'occasion de la SAE204 en BUT INFO 2022-2023</h6>
+        </div>
+
+    </body>
+</html>
